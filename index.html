@@ -4,16 +4,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aurora Café</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Oma CSS -->
   <link rel="stylesheet" href="aurora_stylesheet.css">
 </head>
 <body>
@@ -58,565 +55,575 @@
   </nav>
 
   <!-- HERO -->
-<section class="hero-section d-flex align-items-center" id="home">
+  <section class="hero-section d-flex align-items-center" id="home">
+    <div class="container hero-content">
+      <div class="row align-items-center hero-row">
 
-  <div class="container hero-content">
+        <div class="col-lg-6">
+          <p class="hero-subtitle">Aurora Café</p>
 
-    <div class="row align-items-center">
+          <h1 class="hero-title">
+            Rauhallinen kahvihetki<br>
+            keskellä kaupunkia
+          </h1>
 
-      <!-- TEKSTI -->
-      <div class="col-lg-6">
+          <p class="hero-text">
+            Aurora Café on moderni ja tunnelmallinen kahvila, jossa laadukkaat maut,
+            kiireetön ilmapiiri ja harkittu estetiikka kohtaavat. Tule aamukahville,
+            brunssille tai rauhalliseen hetkeen hyvän kahvin äärelle.
+          </p>
 
-        <p class="hero-subtitle">Aurora Café</p>
+          <div class="hero-buttons d-flex flex-wrap gap-3">
+            <a href="#menu" class="btn hero-btn-primary">Tutustu menuun</a>
+            <a href="#contact" class="btn hero-btn-secondary">Varaa pöytä</a>
+          </div>
+        </div>
 
-        <h1 class="hero-title">
-          Jokainen kuppi<br>
-          kertoo tarinan
-        </h1>
-
-        <p class="hero-text">
-          Tunnelmallinen kahvila, jossa laadukas kahvi,
-          rauhallinen ympäristö ja pohjoisen inspiroima
-          estetiikka kohtaavat.
-        </p>
-
-        <div class="hero-buttons d-flex flex-wrap gap-3">
-          <a href="#menu" class="btn hero-btn-primary">Katso menu</a>
-          <a href="#contact" class="btn hero-btn-secondary">Yhteystiedot</a>
+        <div class="col-lg-6 text-center hero-image-col">
+          <img
+            src="img/hero_coffee.jpg"
+            class="hero-image img-fluid"
+            alt="Kahvikuppi ja kahvipapuja Aurora Cafén tunnelmassa"
+          >
         </div>
 
       </div>
-
-      <!-- KUVA -->
-      <div class="col-lg-6 text-center">
-
-        <img src="img/hero_coffee.jpg"
-             class="hero-image img-fluid"
-             alt="Kahvikuppi ja kahvipapuja">
-
-      </div>
-
     </div>
+  </section>
 
-  </div>
+  <!-- SUOSITUIMMAT TUOTTEET -->
+  <section class="featured-section" id="featured">
+    <div class="container">
+      <div class="row align-items-end mb-5">
+        <div class="col-lg-6">
+          <p class="section-tag">Aurora Café</p>
+          <h2 class="featured-title">Suosituimmat tuotteet</h2>
+        </div>
 
-</section>
-
-<!-- SUOSITUIMMAT TUOTTEET -->
-<section class="featured-section" id="featured">
-  <div class="container">
-    <div class="row align-items-end mb-5">
-      <div class="col-lg-6">
-        <p class="section-tag">Aurora Café</p>
-        <h2 class="featured-title">Suosituimmat tuotteet</h2>
+        <div class="col-lg-6">
+          <p class="featured-intro">
+            Kahvilamme rakastetuimmat maut yhdistävät laadukkaat raaka-aineet,
+            pehmeät aromit ja kiireettömän kahvihetken.
+          </p>
+        </div>
       </div>
 
-      <div class="col-lg-6">
-        <p class="featured-intro">
-          Kahvilamme rakastetuimmat maut yhdistävät laadukkaat raaka-aineet,
-          pehmeät aromit ja rauhallisen kahvihetken.
-        </p>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <article class="featured-item">
+            <div class="featured-image-wrap">
+              <img src="img/cappuccino.jpg" alt="Cappuccino" class="featured-image">
+            </div>
+            <div class="featured-content">
+              <h3 class="featured-item-title">Cappuccino</h3>
+              <p class="featured-text">
+                Täyteläinen espresso, pehmeä maitovaahto ja klassinen makuhetki.
+              </p>
+              <span class="featured-price">4,50 €</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="featured-item featured-item-offset">
+            <div class="featured-image-wrap">
+              <img src="img/berry_parfait.jpg" alt="Marjaparfait" class="featured-image">
+            </div>
+            <div class="featured-content">
+              <h3 class="featured-item-title">Marjaparfait</h3>
+              <p class="featured-text">
+                Raikas kerrosjälkiruoka, jossa on pehmeää parfait-vaahtoa, marjoja sekä granolaa.
+              </p>
+              <span class="featured-price">6,20 €</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="featured-item">
+            <div class="featured-image-wrap">
+              <img src="img/cinnamon_roll.jpg" alt="Kanelipulla" class="featured-image">
+            </div>
+            <div class="featured-content">
+              <h3 class="featured-item-title">Cinnamon Roll</h3>
+              <p class="featured-text">
+                Amerikkalainen kanelipulla, pehmeä ja juuri sopivan mausteinen klassikko kahvin rinnalle.
+              </p>
+              <span class="featured-price">3,90 €</span>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="row g-4">
-      <!-- TUOTE 1 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="featured-item">
-          <div class="featured-image-wrap">
-            <img src="img/cappuccino.jpg" alt="Cappuccino" class="featured-image">
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-6">
+          <p class="section-tag">Menu</p>
+          <h2 class="menu-title">Makujen rauhallinen rytmi</h2>
+        </div>
+        <div class="col-lg-6">
+          <p class="menu-intro">
+            Menumme koostuu huolella valituista kahveista, teelaaduista ja
+            tuoreista leivonnaisista, jotka sopivat niin kiireettömään aamuun
+            kuin iltapäivän hengähdyshetkeen.
+          </p>
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <div class="row">
+          <div class="col-lg-4">
+            <h3 class="menu-category">Kahvit</h3>
           </div>
-          <div class="featured-content">
-            <h3 class="featured-item-title">Cappuccino</h3>
-            <p class="featured-text">
-              Täyteläinen espresso, pehmeä maitovaahto ja klassinen makuhetki.
+
+          <div class="col-lg-8">
+            <div class="menu-list">
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Espresso</h4>
+                    <span>3,20 €</span>
+                  </div>
+                  <p>Pieni mutta intensiivinen klassikko, jossa korostuu kahvin täyteläinen aromi.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Cappuccino</h4>
+                    <span>4,50 €</span>
+                  </div>
+                  <p>Espressoa ja pehmeää maitovaahtoa tasapainoisessa ja samettisessa suhteessa.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Latte</h4>
+                    <span>4,90 €</span>
+                  </div>
+                  <p>Pehmeä ja lämmin kahvijuoma, jossa kahvin ja maidon maut kohtaavat lempeästi.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <div class="row">
+          <div class="col-lg-4">
+            <h3 class="menu-category">Teet</h3>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="menu-list">
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Vihreä tee</h4>
+                    <span>3,80 €</span>
+                  </div>
+                  <p>Raikas ja kevyt teehetki, jossa on pehmeä ja puhdas jälkimaku.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Chai latte</h4>
+                    <span>4,80 €</span>
+                  </div>
+                  <p>Mausteinen ja lämmin juoma, jossa yhdistyvät tee, maito ja pehmeät aromit.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Yrttitee</h4>
+                    <span>3,90 €</span>
+                  </div>
+                  <p>Luonnollisen rauhoittava vaihtoehto hitaaseen ja levolliseen hetkeen.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <div class="row">
+          <div class="col-lg-4">
+            <h3 class="menu-category">Leivonnaiset</h3>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="menu-list">
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Kanelipulla</h4>
+                    <span>3,90 €</span>
+                  </div>
+                  <p>Tuore ja pehmeä klassikko, jossa on sopivasti makeutta ja mausteisuutta.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Mustikkapiiras</h4>
+                    <span>4,40 €</span>
+                  </div>
+                  <p>Pohjoisen marjoista inspiroitunut leivonnainen, jossa yhdistyvät makeus ja raikkaus.</p>
+                </div>
+              </div>
+
+              <div class="menu-item">
+                <div class="menu-item-text">
+                  <div class="menu-item-top">
+                    <h4>Vegaaninen brownie</h4>
+                    <span>4,60 €</span>
+                  </div>
+                  <p>Täyteläinen suklaaleivonnainen, joka tarjoaa pehmeän ja runsaan makuelämyksen.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALLERIA -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="row align-items-end mb-5">
+        <div class="col-lg-6">
+          <p class="section-tag">Galleria</p>
+          <h2 class="gallery-title">Tunnelmia kahvilasta</h2>
+        </div>
+
+        <div class="col-lg-6">
+          <p class="gallery-intro">
+            Aurora Caféssa yhdistyvät rauhallinen tunnelma, lämpimät sävyt
+            ja kiireettömät kahvihetket. Galleria kokoaa yhteen hetkiä,
+            jotka tekevät kahvilasta paikan, johon haluaa palata.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-large">
+          <img src="img/gallery1.jpg" alt="Kahvilatuotteita" class="gallery-image">
+        </div>
+
+        <div class="gallery-item gallery-small-top">
+          <img src="img/gallery2.jpg" alt="Kahvilan sisustus" class="gallery-image">
+        </div>
+
+        <div class="gallery-item gallery-small-bottom">
+          <img src="img/gallery3.jpg" alt="Leivonnainen ja kahvi" class="gallery-image">
+        </div>
+
+        <div class="gallery-item gallery-wide-left">
+          <img src="img/gallery4.jpg" alt="Kahvipapuja" class="gallery-image">
+        </div>
+
+        <div class="gallery-item gallery-wide-right">
+          <img src="img/gallery5.jpg" alt="Kahvin teko" class="gallery-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YHTEYSTIEDOT -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+
+        <div class="col-lg-5">
+          <p class="section-tag">Yhteystiedot</p>
+          <h2 class="contact-title">Vieraile tai varaa pöytä</h2>
+
+          <p class="contact-intro">
+            Haluatko varata pöydän brunssille, kahvihetkeen tai tapaamiseen?
+            Lähetä varauspyyntö lomakkeella tai ota yhteyttä suoraan. Vahvistamme
+            varaukset sähköpostitse mahdollisimman pian.
+          </p>
+
+          <div class="contact-info-group">
+            <div class="contact-info-item">
+              <h3>Osoite</h3>
+              <p>Koskikatu 12<br>96200 Rovaniemi</p>
+            </div>
+
+            <div class="contact-info-item">
+              <h3>Aukioloajat</h3>
+              <p>Ma–Pe 7.30–18.00<br>La 9.00–17.00<br>Su 10.00–16.00</p>
+            </div>
+
+            <div class="contact-info-item">
+              <h3>Varaus ja yhteydenotot</h3>
+              <p>hello@auroracafe.fi<br>040 123 4567</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="booking-form-wrap">
+            <h3 class="booking-form-title">Lähetä varauspyyntö</h3>
+            <p class="booking-form-intro">
+              Täytä tiedot alle, niin palaamme varauksen vahvistukseen sähköpostitse.
             </p>
-            <span class="featured-price">4,50 €</span>
+
+            <form class="booking-form" id="bookingForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Nimi</label>
+                  <input type="text" class="form-control custom-input" id="name" placeholder="Nimesi">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Sähköposti</label>
+                  <input type="email" class="form-control custom-input" id="email" placeholder="Sähköpostiosoite">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="date" class="form-label">Päivämäärä</label>
+                  <input type="date" class="form-control custom-input" id="date">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="time" class="form-label">Toivottu kellonaika</label>
+                  <input type="time" class="form-control custom-input" id="time">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="guests" class="form-label">Henkilömäärä</label>
+                  <select class="form-select custom-input" id="guests">
+                    <option selected>Valitse</option>
+                    <option>1 henkilö</option>
+                    <option>2 henkilöä</option>
+                    <option>3 henkilöä</option>
+                    <option>4 henkilöä</option>
+                    <option>5 henkilöä</option>
+                    <option>6+ henkilöä</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="message" class="form-label">Lisätiedot</label>
+                  <textarea class="form-control custom-input custom-textarea" id="message" rows="5" placeholder="Esimerkiksi allergiat tai erityistoiveet"></textarea>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn booking-btn">Lähetä varauspyyntö</button>
+                </div>
+              </div>
+            </form>
           </div>
-        </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="container text-center">
+      <h2 class="footer-brand">Aurora Café</h2>
+      <p class="footer-text">Pohjoisen rauhaa kupillinen kerrallaan.</p>
+
+      <div class="footer-links">
+        <a href="#home">Etusivu</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Galleria</a>
+        <a href="#contact">Yhteystiedot</a>
       </div>
 
-      <!-- TUOTE 2 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="featured-item featured-item-offset">
-          <div class="featured-image-wrap">
-            <img src="img/berry_parfait.jpg" alt="Vaniljalatte" class="featured-image">
-          </div>
-          <div class="featured-content">
-            <h3 class="featured-item-title">Marjaparfait</h3>
-            <p class="featured-text">
-              Raikas kerrosjälkiruoka, jossa on pehmeää parfait-vaahtoa, marjoja sekä granolaa.
-            </p>
-            <span class="featured-price">6,20 €</span>
-          </div>
-        </article>
+      <p class="footer-copy">© 2026 Aurora Café</p>
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <div class="chatbot">
+    <button class="chat-toggle" id="chatToggle" aria-label="Avaa chat">
+      💬
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div>
+          <h3>Aurora Café</h3>
+          <p>Chatbot</p>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Sulje chat">×</button>
       </div>
 
-      <!-- TUOTE 3 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="featured-item">
-          <div class="featured-image-wrap">
-            <img src="img/cinnamon_roll.jpg" alt="Kanelipulla" class="featured-image">
-          </div>
-          <div class="featured-content">
-            <h3 class="featured-item-title">Cinnamon Roll</h3>
-            <p class="featured-text">
-              Amerikkalainen kanelipulla, pehmeä ja juuri sopivan mausteinen klassikko kahvin rinnalle.
-            </p>
-            <span class="featured-price">3,90 €</span>
-          </div>
-        </article>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message bot-message">
+          Hei! Voit kysyä esimerkiksi aukioloajoista, menusta, sijainnista, varauksista tai erityisruokavalioista.
+        </div>
+      </div>
+
+      <form class="chat-form" id="chatForm">
+        <input
+          type="text"
+          id="chatInput"
+          class="chat-input"
+          placeholder="Kirjoita viesti..."
+          autocomplete="off"
+        >
+        <button type="submit" class="chat-send">Lähetä</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VARAUSILMOITUS MODAL -->
+  <div class="modal fade" id="bookingDemoModal" tabindex="-1" aria-labelledby="bookingDemoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content booking-modal-content">
+        <div class="modal-header booking-modal-header">
+          <h5 class="modal-title" id="bookingDemoModalLabel">Varauspyyntö vastaanotettu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
+        </div>
+        <div class="modal-body booking-modal-body" id="bookingModalMessage">
+          Kiitos! Varauspyyntösi on vastaanotettu.
+        </div>
+        <div class="modal-footer booking-modal-footer">
+          <button type="button" class="btn booking-modal-btn" data-bs-dismiss="modal">Sulje</button>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- MENU -->
-<section class="menu-section" id="menu">
-  <div class="container">
-    <div class="row mb-5">
-      <div class="col-lg-6">
-        <p class="section-tag">Menu</p>
-        <h2 class="menu-title">Makujen rauhallinen rytmi</h2>
-      </div>
-      <div class="col-lg-6">
-        <p class="menu-intro">
-          Menumme koostuu huolella valituista kahveista, teelaaduista ja
-          tuoreista leivonnaisista, jotka sopivat niin kiireettömään aamuun
-          kuin iltapäivän hengähdyshetkeen.
-        </p>
-      </div>
-    </div>
+  <script>
+    const chatToggle = document.getElementById("chatToggle");
+    const chatClose = document.getElementById("chatClose");
+    const chatWindow = document.getElementById("chatWindow");
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+    const chatBody = document.getElementById("chatBody");
+    const bookingForm = document.getElementById("bookingForm");
+    const bookingModalMessage = document.getElementById("bookingModalMessage");
 
-    <!-- KAHVIT -->
-    <div class="menu-block">
-      <div class="row">
-        <div class="col-lg-4">
-          <h3 class="menu-category">Kahvit</h3>
-        </div>
+    chatToggle.addEventListener("click", () => {
+      chatWindow.classList.toggle("active");
+    });
 
-        <div class="col-lg-8">
-          <div class="menu-list">
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Espresso</h4>
-                  <span>3,20 €</span>
-                </div>
-                <p>Pieni mutta intensiivinen klassikko, jossa korostuu kahvin täyteläinen aromi.</p>
-              </div>
-            </div>
+    chatClose.addEventListener("click", () => {
+      chatWindow.classList.remove("active");
+    });
 
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Cappuccino</h4>
-                  <span>4,50 €</span>
-                </div>
-                <p>Espressoa ja pehmeää maitovaahtoa tasapainoisessa ja samettisessa suhteessa.</p>
-              </div>
-            </div>
-
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Latte</h4>
-                  <span>4,90 €</span>
-                </div>
-                <p>Pehmeä ja lämmin kahvijuoma, jossa kahvin ja maidon maut kohtaavat lempeästi.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEET -->
-    <div class="menu-block">
-      <div class="row">
-        <div class="col-lg-4">
-          <h3 class="menu-category">Teet</h3>
-        </div>
-
-        <div class="col-lg-8">
-          <div class="menu-list">
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Vihreä tee</h4>
-                  <span>3,80 €</span>
-                </div>
-                <p>Raikas ja kevyt teehetki, jossa on pehmeä ja puhdas jälkimaku.</p>
-              </div>
-            </div>
-
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Chai latte</h4>
-                  <span>4,80 €</span>
-                </div>
-                <p>Mausteinen ja lämmin juoma, jossa yhdistyvät tee, maito ja pehmeät aromit.</p>
-              </div>
-            </div>
-
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Yrttitee</h4>
-                  <span>3,90 €</span>
-                </div>
-                <p>Luonnollisen rauhoittava vaihtoehto hitaaseen ja levolliseen hetkeen.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEIVONNAISET -->
-    <div class="menu-block">
-      <div class="row">
-        <div class="col-lg-4">
-          <h3 class="menu-category">Leivonnaiset</h3>
-        </div>
-
-        <div class="col-lg-8">
-          <div class="menu-list">
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Kanelipulla</h4>
-                  <span>3,90 €</span>
-                </div>
-                <p>Tuore ja pehmeä klassikko, jossa on sopivasti makeutta ja mausteisuutta.</p>
-              </div>
-            </div>
-
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Mustikkapiiras</h4>
-                  <span>4,40 €</span>
-                </div>
-                <p>Pohjoisen marjoista inspiroitunut leivonnainen, jossa yhdistyvät makeus ja raikkaus.</p>
-              </div>
-            </div>
-
-            <div class="menu-item">
-              <div class="menu-item-text">
-                <div class="menu-item-top">
-                  <h4>Vegaaninen brownie</h4>
-                  <span>4,60 €</span>
-                </div>
-                <p>Täyteläinen suklaaleivonnainen, joka tarjoaa pehmeän ja runsaan makuelämyksen.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- GALLERIA -->
-<section class="gallery-section" id="gallery">
-  <div class="container">
-    <div class="row align-items-end mb-5">
-      <div class="col-lg-6">
-        <p class="section-tag">Galleria</p>
-        <h2 class="gallery-title">Tunnelmia kahvilasta</h2>
-      </div>
-
-      <div class="col-lg-6">
-        <p class="gallery-intro">
-          Aurora Caféssa yhdistyvät rauhallinen tunnelma, lämpimät sävyt
-          ja kiireettömät kahvihetket. Galleria kokoaa yhteen hetkiä,
-          jotka tekevät kahvilasta paikan, johon haluaa palata.
-        </p>
-      </div>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="gallery-item gallery-large">
-        <img src="img/gallery1.jpg" alt="Kahvilatuotteita" class="gallery-image">
-      </div>
-
-      <div class="gallery-item gallery-small-top">
-        <img src="img/gallery2.jpg" alt="Kahvilan sisustus" class="gallery-image">
-      </div>
-
-      <div class="gallery-item gallery-small-bottom">
-        <img src="img/gallery3.jpg" alt="Leivonnainen ja kahvi" class="gallery-image">
-      </div>
-
-      <div class="gallery-item gallery-wide-left">
-        <img src="img/gallery4.jpg" alt="Kahvipapuja" class="gallery-image">
-      </div>
-
-      <div class="gallery-item gallery-wide-right">
-        <img src="img/gallery5.jpg" alt="Kahvin teko" class="gallery-image">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- YHTEYSTIEDOT -->
-<section class="contact-section" id="contact">
-  <div class="container">
-    <div class="row g-5 align-items-start">
-      
-      <!-- VASEN PUOLI -->
-      <div class="col-lg-5">
-        <p class="section-tag">Yhteystiedot</p>
-        <h2 class="contact-title">Vieraile tai varaa pöytä</h2>
-
-        <p class="contact-intro">
-          Aurora Café tarjoaa rauhallisen ympäristön kahvihetkiin,
-          tapaamisiin ja kiireettömiin aamuihin. Ota yhteyttä tai
-          jätä varauspyyntö lomakkeella.
-        </p>
-
-        <div class="contact-info-group">
-          <div class="contact-info-item">
-            <h3>Osoite</h3>
-            <p>Koskikatu 12<br>96200 Rovaniemi</p>
-          </div>
-
-          <div class="contact-info-item">
-            <h3>Aukioloajat</h3>
-            <p>Ma–Pe 7.00–18.00<br>La–Su 9.00–16.00</p>
-          </div>
-
-          <div class="contact-info-item">
-            <h3>Yhteys</h3>
-            <p>hello@auroracafe.fi<br>040 123 4567</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- OIKEA PUOLI -->
-      <div class="col-lg-7">
-        <div class="booking-form-wrap">
-          <h3 class="booking-form-title">Varaa pöytä</h3>
-
-          <form class="booking-form" id="bookingForm">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="name" class="form-label">Nimi</label>
-                <input type="text" class="form-control custom-input" id="name" placeholder="Nimesi">
-              </div>
-
-              <div class="col-md-6">
-                <label for="email" class="form-label">Sähköposti</label>
-                <input type="email" class="form-control custom-input" id="email" placeholder="Sähköpostiosoite">
-              </div>
-
-              <div class="col-md-6">
-                <label for="date" class="form-label">Päivämäärä</label>
-                <input type="date" class="form-control custom-input" id="date">
-              </div>
-
-              <div class="col-md-6">
-                <label for="guests" class="form-label">Henkilömäärä</label>
-                <select class="form-select custom-input" id="guests">
-                  <option selected>Valitse</option>
-                  <option>1 henkilö</option>
-                  <option>2 henkilöä</option>
-                  <option>3 henkilöä</option>
-                  <option>4 henkilöä</option>
-                  <option>5+ henkilöä</option>
-                </select>
-              </div>
-
-              <div class="col-12">
-                <label for="message" class="form-label">Lisätiedot</label>
-                <textarea class="form-control custom-input custom-textarea" id="message" rows="5" placeholder="Esimerkiksi toivottu kellonaika tai erityistoiveet"></textarea>
-              </div>
-
-              <div class="col-12">
-                <button type="submit" class="btn booking-btn">Lähetä varauspyyntö</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer-section">
-  <div class="container text-center">
-    <h2 class="footer-brand">Aurora Café</h2>
-    <p class="footer-text">Pohjoisen rauhaa kupillinen kerrallaan.</p>
-
-    <div class="footer-links">
-      <a href="#home">Etusivu</a>
-      <a href="#menu">Menu</a>
-      <a href="#gallery">Galleria</a>
-      <a href="#contact">Yhteystiedot</a>
-    </div>
-
-    <p class="footer-copy">© 2026 Aurora Café</p>
-  </div>
-</footer>
-
-<!-- CHATBOT -->
-<div class="chatbot">
-  <button class="chat-toggle" id="chatToggle" aria-label="Avaa chat">
-    💬
-  </button>
-
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-header">
-      <div>
-        <h3>Aurora Café</h3>
-        <p>Chatbot</p>
-      </div>
-      <button class="chat-close" id="chatClose" aria-label="Sulje chat">×</button>
-    </div>
-
-    <div class="chat-body" id="chatBody">
-      <div class="chat-message bot-message">
-        Hei! Voit kysyä esimerkiksi aukioloajoista, menusta, sijainnista tai vegaanisista vaihtoehdoista.
-      </div>
-    </div>
-
-    <form class="chat-form" id="chatForm">
-      <input
-        type="text"
-        id="chatInput"
-        class="chat-input"
-        placeholder="Kirjoita viesti..."
-        autocomplete="off"
-      >
-      <button type="submit" class="chat-send">Lähetä</button>
-    </form>
-  </div>
-</div>
-
-<!-- VARAUSILMOITUS MODAL -->
-<div class="modal fade" id="bookingDemoModal" tabindex="-1" aria-labelledby="bookingDemoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content booking-modal-content">
-      <div class="modal-header booking-modal-header">
-        <h5 class="modal-title" id="bookingDemoModalLabel">Varauspyyntö lähetetty</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
-      </div>
-      <div class="modal-body booking-modal-body">
-        Kiitos! Varauspyyntösi on lähetetty onnistuneesti sähköpostiin hello@auroracafe.fi.
-        <br><br>
-        <strong>Huom:</strong> tämä sivu on demokäyttöön tehty referenssi, eikä viestiä oikeasti lähetetä minnekään. Tällä vain havainnollistetaan toiminnallisuutta.
-      </div>
-      <div class="modal-footer booking-modal-footer">
-        <button type="button" class="btn booking-modal-btn" data-bs-dismiss="modal">Sulje</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  const chatToggle = document.getElementById("chatToggle");
-  const chatClose = document.getElementById("chatClose");
-  const chatWindow = document.getElementById("chatWindow");
-  const chatForm = document.getElementById("chatForm");
-  const chatInput = document.getElementById("chatInput");
-  const chatBody = document.getElementById("chatBody");
-  const bookingForm = document.getElementById("bookingForm");
-
-  chatToggle.addEventListener("click", () => {
-    chatWindow.classList.toggle("active");
-  });
-
-  chatClose.addEventListener("click", () => {
-    chatWindow.classList.remove("active");
-  });
-
-  function addMessage(message, sender) {
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("chat-message");
-
-    if (sender === "bot") {
-      messageDiv.classList.add("bot-message");
-    } else {
-      messageDiv.classList.add("user-message");
+    function addMessage(message, sender) {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("chat-message");
+      messageDiv.classList.add(sender === "bot" ? "bot-message" : "user-message");
+      messageDiv.textContent = message;
+      chatBody.appendChild(messageDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    messageDiv.textContent = message;
-    chatBody.appendChild(messageDiv);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
+    function getBotReply(userMessage) {
+      const message = userMessage.toLowerCase();
 
-  function getBotReply(userMessage) {
-    const message = userMessage.toLowerCase();
+      if (message.includes("aukiolo") || message.includes("milloin") || message.includes("auki")) {
+        return "Aurora Café on avoinna ma–pe 7.30–18.00, la 9.00–17.00 ja su 10.00–16.00.";
+      }
 
-    if (message.includes("aukiolo") || message.includes("milloin") || message.includes("auki")) {
-      return "Aurora Café on avoinna ma–pe 7.00–18.00 ja la–su 9.00–16.00.";
+      if (message.includes("missä") || message.includes("osoite") || message.includes("sijainti") || message.includes("rovaniemi")) {
+        return "Löydät meidät osoitteesta Koskikatu 12, 96200 Rovaniemi.";
+      }
+
+      if (message.includes("vegaani") || message.includes("vegaaninen") || message.includes("vegaan")) {
+        return "Kyllä, valikoimassamme on vegaanisia vaihtoehtoja, kuten vegaaninen brownie sekä kasvipohjaisia maitovaihtoehtoja kahvijuomiin.";
+      }
+
+      if (message.includes("gluteen") || message.includes("allergia") || message.includes("erityisruok")) {
+        return "Huomioimme erityisruokavaliot mahdollisuuksien mukaan. Tarkemmat tiedot tuotteista saat henkilökunnalta tai yhteydenottolomakkeella.";
+      }
+
+      if (message.includes("varaus") || message.includes("pöytä") || message.includes("varata") || message.includes("booking")) {
+        return "Voit lähettää varauspyynnön sivun lomakkeella. Vahvistamme varaukset sähköpostitse mahdollisimman pian.";
+      }
+
+      if (message.includes("menu") || message.includes("kahvi") || message.includes("tee") || message.includes("leivonn")) {
+        return "Menustamme löydät kahveja, teelaatuja ja leivonnaisia. Voit tutustua valikoimaan Menu-osiossa.";
+      }
+
+      if (message.includes("brunssi") || message.includes("aamiainen") || message.includes("lounas")) {
+        return "Tällä demoversiolla emme esittele erillistä lounaslistaa, mutta kahvilan valikoimaan kuuluu kahveja, teetä ja leivonnaisia.";
+      }
+
+      if (message.includes("koira") || message.includes("lemmikki")) {
+        return "Voit kysyä lemmikeistä suoraan kahvilalta puhelimitse tai sähköpostitse. Tätä tietoa ei ole tällä demoversiolla erikseen määritelty.";
+      }
+
+      if (message.includes("hei") || message.includes("moikka") || message.includes("hello")) {
+        return "Hei! Voin auttaa esimerkiksi aukioloajoissa, sijainnissa, menussa, varauksissa ja erityisruokavalioissa.";
+      }
+
+      if (message.includes("kiitos")) {
+        return "Ole hyvä! Kysy lisää, jos haluat tietoa esimerkiksi menusta tai varauksista.";
+      }
+
+      return "En valitettavasti osannut vastata tuohon. Voit kysyä esimerkiksi aukioloajoista, sijainnista, varauksista, menusta tai erityisruokavalioista.";
     }
 
-    if (message.includes("missä") || message.includes("osoite") || message.includes("sijainti")) {
-      return "Löydät meidät osoitteesta Koskikatu 12, 96200 Rovaniemi.";
-    }
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    if (message.includes("vegaani") || message.includes("vegaaninen")) {
-      return "Kyllä, valikoimassamme on vegaanisia vaihtoehtoja, kuten vegaaninen brownie sekä kasvipohjaisia maitovaihtoehtoja kahvijuomiin.";
-    }
+      const userMessage = chatInput.value.trim();
+      if (userMessage === "") return;
 
-    if (message.includes("varaus") || message.includes("pöytä") || message.includes("varata")) {
-      return "Voit jättää varauspyynnön sivun Varaa pöytä -lomakkeella, niin palaamme asiaan mahdollisimman pian.";
-    }
+      addMessage(userMessage, "user");
+      const botReply = getBotReply(userMessage);
 
-    if (message.includes("menu") || message.includes("kahvi") || message.includes("tee") || message.includes("leivonn")) {
-      return "Menustamme löydät kahveja, teelaatuja ja tuoreita leivonnaisia. Voit tutustua valikoimaan Menu-osiossa.";
-    }
+      setTimeout(() => {
+        addMessage(botReply, "bot");
+      }, 400);
 
-    if (message.includes("hei") || message.includes("moikka")) {
-      return "Hei! Miten voin auttaa?";
-    }
+      chatInput.value = "";
+    });
 
-    return "En valitettavasti osannut vastata tuohon. Voit kysyä esimerkiksi aukioloajoista, sijainnista, menusta tai vegaanisista vaihtoehdoista.";
-  }
+    bookingForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  chatForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const date = document.getElementById("date").value.trim();
+      const time = document.getElementById("time").value.trim();
+      const guests = document.getElementById("guests").value;
 
-    const userMessage = chatInput.value.trim();
+      if (name === "" || email === "" || date === "" || guests === "Valitse") {
+        alert("Täytä ensin nimi, sähköposti, päivämäärä ja henkilömäärä.");
+        return;
+      }
 
-    if (userMessage === "") return;
+      bookingModalMessage.innerHTML = `
+        Kiitos, <strong>${name}</strong>! Varauspyyntösi on vastaanotettu.<br><br>
+        <strong>Päivämäärä:</strong> ${date}<br>
+        <strong>Kellonaika:</strong> ${time || "Ei ilmoitettu"}<br>
+        <strong>Henkilömäärä:</strong> ${guests}<br>
+        <strong>Vahvistus:</strong> Lähetetään osoitteeseen ${email}.<br><br>
+        <strong>Huom:</strong> tämä on demokäyttöön tehty referenssisivu, eikä varausta oikeasti lähetetä eteenpäin.
+      `;
 
-    addMessage(userMessage, "user");
+      const bookingModal = new bootstrap.Modal(document.getElementById("bookingDemoModal"));
+      bookingModal.show();
 
-    const botReply = getBotReply(userMessage);
+      bookingForm.reset();
+    });
+  </script>
 
-    setTimeout(() => {
-      addMessage(botReply, "bot");
-    }, 500);
-
-    chatInput.value = "";
-  });
-
-  bookingForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const date = document.getElementById("date").value.trim();
-  const guests = document.getElementById("guests").value;
-
-  if (name === "" || email === "" || date === "" || guests === "Valitse") {
-    alert("Täytä ensin nimi, sähköposti, päivämäärä ja henkilömäärä.");
-    return;
-  }
-
-  const bookingModal = new bootstrap.Modal(document.getElementById("bookingDemoModal"));
-  bookingModal.show();
-
-  bookingForm.reset();
-});
-</script>
-  
 </body>
 </html>
