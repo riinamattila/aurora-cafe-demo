@@ -20,3 +20,4 @@ The purpose of the project is to demonstrate:
 Note:  
 This website is a fictional demo project.  
 No real booking requests or messages are sent.
+CSS is embedded directly in index.html. The aurora_stylesheet.css file is no longer in use.
