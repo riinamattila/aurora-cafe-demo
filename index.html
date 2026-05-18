@@ -1,628 +1,1620 @@
+<!DOCTYPE html>
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aurora Café</title>
+  <title>Aurora Café — Pohjoisen rauhaa kupillinen kerrallaan</title>
+  <meta name="description" content="Aurora Café on tunnelmallinen kahvila Rovaniemellä. Laadukkaat maut, kiireetön ilmapiiri ja harkittu estetiikka. Varaa pöytä tai tule kahville.">
+  <meta property="og:title" content="Aurora Café — Rovaniemi">
+  <meta property="og:description" content="Rauhallinen kahvihetki keskellä kaupunkia. Laadukkaita kahveja, teetä ja leivonnaisia.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/hero_coffee.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
-  <link rel="stylesheet" href="aurora_stylesheet.css">
+  <style>
+    /* TOKENS */
+    :root {
+      --bg:       #0d0b09;
+      --bg2:      #141210;
+      --bg3:      #1a1714;
+      --surface:  #1f1c18;
+      --copper:   #b5723a;
+      --copper2:  #d4894a;
+      --cream:    #f0e8dc;
+      --muted:    rgba(240,232,220,0.5);
+      --faint:    rgba(240,232,220,0.12);
+      --border:   rgba(240,232,220,0.08);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-serif:   'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* RESET & BASE */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--cream);
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    section { scroll-margin-top: 80px; }
+
+    /* SKIP LINK (WCAG 2.4.1) */
+    .skip-link {
+      position: fixed;
+      top: -100%;
+      left: 1rem;
+      z-index: 9999;
+      background: var(--copper);
+      color: #000;
+      padding: 0.6rem 1.2rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-radius: 0 0 4px 4px;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      background: rgba(13,11,9,0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s;
+    }
+    .navbar.scrolled { background: rgba(13,11,9,0.97); }
+    .nav-inner {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      color: var(--cream);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta {
+      padding: 0.55rem 1.2rem;
+      border: 1px solid var(--copper);
+      color: var(--copper) !important;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--copper); color: #000 !important; }
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--copper);
+      outline-offset: 3px;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger:focus-visible { outline: 2px solid var(--copper); outline-offset: 4px; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 80px; left: 0; right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; }
+    .mobile-menu a {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .mobile-menu a:hover { color: var(--cream); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem) clamp(4rem, 8vw, 7rem);
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 7vw, 10rem);
+      line-height: 0.88;
+      letter-spacing: 4px;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+    .hero-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.55em;
+      letter-spacing: 1px;
+      display: block;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .hero-body {
+      max-width: 420px;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--copper);
+      color: #000;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .btn-primary:hover { background: var(--copper2); transform: translateY(-2px); }
+    .btn-primary:focus-visible { outline: 2px solid var(--copper2); outline-offset: 3px; }
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--faint);
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s var(--ease);
+    }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--cream); transform: translateY(-2px); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65) saturate(0.8);
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, rgba(13,11,9,0.55) 42%, transparent 68%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 22%);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 3;
+    }
+    .hero-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--copper);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.6); }
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      letter-spacing: 3px;
+      color: var(--copper);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* SECTION HEADER */
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      letter-spacing: 3px;
+      line-height: 0.92;
+      color: var(--cream);
+    }
+
+    /* FEATURED */
+    .featured {
+      padding: 8rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .featured-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .featured-intro {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 460px;
+      align-self: end;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--surface);
+    }
+    .product-card:nth-child(2) { margin-top: 3rem; }
+    .product-img-wrap {
+      overflow: hidden;
+      height: 380px;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease), filter 0.5s;
+      filter: brightness(0.8) saturate(0.7);
+    }
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.06);
+      filter: brightness(0.9) saturate(0.85);
+    }
+    .product-info {
+      padding: 1.5rem 1.5rem 2rem;
+      background: var(--surface);
+      position: relative;
+    }
+    .product-info::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 1.5rem;
+      width: 30px; height: 1px;
+      background: var(--copper);
+    }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: var(--cream);
+      margin: 1rem 0 0.5rem;
+    }
+    .product-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .product-price {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+
+    /* MENU */
+    .menu-section {
+      padding: 8rem 4rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .menu-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    .menu-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .menu-tab {
+      padding: 0.75rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+    .menu-tab.active { color: var(--copper); border-bottom-color: var(--copper); }
+    .menu-tab:hover { color: var(--cream); }
+    .menu-tab:focus-visible { outline: 2px solid var(--copper); outline-offset: -2px; }
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+    .menu-list { display: flex; flex-direction: column; gap: 0; }
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:hover { border-color: var(--faint); }
+    .menu-item-name {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.35rem;
+    }
+    .menu-item-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .menu-item-price {
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: var(--copper);
+      white-space: nowrap;
+      padding-top: 0.35rem;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 8rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .testimonials-header {
+      margin-bottom: 4rem;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .testimonial-card {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .testimonial-stars {
+      color: var(--copper);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .testimonial-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #000;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      color: var(--cream);
+    }
+    .testimonial-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* GALLERY */
+    .gallery-section {
+      padding: 0 4rem 8rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .gallery-section .section-tag,
+    .gallery-section .section-title { margin-bottom: 0.5rem; }
+    .gallery-header { margin-bottom: 3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 220px;
+      gap: 1.5px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease), filter 0.5s;
+      filter: brightness(0.75) saturate(0.7);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.9) saturate(0.85);
+    }
+    .gallery-item:first-child { grid-row: 1 / 3; }
+    .gallery-item:nth-child(4) { grid-column: 2 / 4; }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 8rem 4rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 6rem;
+    }
+    .contact-info-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .contact-info-label {
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.5rem;
+    }
+    .contact-info-value {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* FORM */
+    .form-wrap {
+      background: var(--surface);
+      padding: 3rem;
+      border: 1px solid var(--border);
+    }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      letter-spacing: 3px;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .form-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .form-control {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      color: var(--cream);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-control::placeholder { color: rgba(240,232,220,0.25); }
+    .form-control:hover { border-color: var(--faint); }
+    .form-control:focus {
+      border-color: var(--copper);
+      box-shadow: 0 0 0 3px rgba(181,114,58,0.15);
+    }
+    .form-control:focus-visible {
+      outline: 2px solid var(--copper);
+      outline-offset: 2px;
+    }
+    .form-control.error { border-color: #c0392b; }
+    .form-control.error:focus { box-shadow: 0 0 0 3px rgba(192,57,43,0.15); }
+    .field-error {
+      font-size: 0.75rem;
+      color: #e57878;
+      margin-top: 0.35rem;
+      display: none;
+      letter-spacing: 0.5px;
+    }
+    .field-error.visible { display: block; }
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b5723a' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    textarea.form-control { resize: none; }
+    .trust-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .trust-row span { color: var(--copper); font-size: 0.85rem; }
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--copper);
+      color: #000;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .submit-btn:hover:not(:disabled) { background: var(--copper2); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .submit-btn:focus-visible { outline: 2px solid var(--copper2); outline-offset: 3px; }
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .submit-btn.loading .spinner { display: block; }
+    .submit-btn.loading .btn-text { opacity: 0.7; }
+
+    /* SUCCESS MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      max-width: 480px;
+      width: 100%;
+      padding: 2.5rem;
+    }
+    .modal-icon {
+      font-size: 2rem;
+      color: var(--copper);
+      margin-bottom: 1rem;
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 3px;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+    .modal-body-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .modal-body-text strong { color: var(--cream); }
+    .modal-close {
+      width: 100%;
+      padding: 0.85rem;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-close:hover { border-color: var(--muted); color: var(--cream); }
+    .modal-close:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+
+    /* FOOTER */
+    .footer {
+      padding: 3rem 4rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      color: var(--cream);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy { font-size: 0.72rem; color: rgba(240,232,220,0.25); }
+
+    /* STICKY CTA (mobile) */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      left: 1rem; right: 1rem;
+      z-index: 500;
+    }
+    .sticky-cta a {
+      display: block;
+      text-align: center;
+      padding: 1rem;
+      background: var(--copper);
+      color: #000;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* CHATBOT */
+    .chatbot {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .chat-toggle {
+      width: 52px; height: 52px;
+      background: var(--copper);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .chat-toggle svg { width: 22px; height: 22px; fill: #000; }
+    .chat-toggle:hover { background: var(--copper2); transform: translateY(-2px); }
+    .chat-toggle:focus-visible { outline: 3px solid var(--copper2); outline-offset: 3px; }
+    .chat-window {
+      width: 320px;
+      height: 440px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .chat-window.active { display: flex; }
+    .chat-header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-header-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: var(--cream);
+    }
+    .chat-header-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .chat-header-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: #4caf80;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .chat-close-btn {
+      background: none; border: none;
+      color: var(--muted); cursor: pointer; font-size: 1.4rem; line-height: 1;
+      padding: 0; transition: color 0.2s;
+    }
+    .chat-close-btn:hover { color: var(--cream); }
+    .chat-close-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+    .chat-body {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    /* aria-live for screen readers */
+    .chat-message {
+      max-width: 82%;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.87rem;
+      line-height: 1.6;
+      word-wrap: break-word;
+    }
+    .bot-message {
+      align-self: flex-start;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--cream);
+    }
+    .user-message {
+      align-self: flex-end;
+      background: var(--copper);
+      color: #000;
+    }
+    .chat-form {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--bg3);
+      border: none;
+      border-right: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.87rem;
+      outline: none;
+    }
+    .chat-input::placeholder { color: rgba(240,232,220,0.25); }
+    .chat-input:focus { background: var(--bg2); }
+    .chat-send {
+      background: var(--copper);
+      border: none;
+      color: #000;
+      padding: 0 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .chat-send:hover { background: var(--copper2); }
+    .chat-send:focus-visible { outline: 2px solid var(--copper2); outline-offset: -2px; }
+
+    /* SCROLL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; min-height: 90vh; }
+      .hero-right { position: absolute; inset: 0; z-index: 0; }
+      .hero-left {
+        position: relative; z-index: 2;
+        padding: 5rem 2rem 4rem;
+        background: linear-gradient(to top, var(--bg) 40%, rgba(13,11,9,0.5));
+        min-height: 90vh;
+        justify-content: flex-end;
+      }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 2rem; }
+      .featured { padding: 5rem 2rem; }
+      .featured-header { grid-template-columns: 1fr; }
+      .featured-grid { grid-template-columns: 1fr 1fr; gap: 1.5px; }
+      .product-card:nth-child(2) { margin-top: 0; }
+      .menu-section { padding: 5rem 2rem; }
+      .menu-header { grid-template-columns: 1fr; }
+      .testimonials { padding: 5rem 2rem; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 1.5px; }
+      .gallery-section { padding: 0 2rem 5rem; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .gallery-item:first-child { grid-row: auto; }
+      .gallery-item:nth-child(4) { grid-column: auto; }
+      .contact-section { padding: 5rem 2rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
+      .footer-links { justify-content: center; flex-wrap: wrap; }
+      .sticky-cta { display: block; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 640px) {
+      body { padding-top: 70px; }
+      .navbar { height: 70px; padding: 0 1.25rem; }
+      .hero-title { font-size: clamp(3.5rem, 14vw, 6rem); }
+      .hero-left { padding: 4rem 1.25rem 3rem; }
+      .stats-bar { grid-template-columns: 1fr 1fr; padding: 1.5rem 1.25rem; gap: 1.25rem; }
+      .featured { padding: 4rem 1.25rem; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .menu-section { padding: 4rem 1.25rem; }
+      .menu-tab { padding: 0.6rem 1rem; font-size: 0.7rem; }
+      .testimonials { padding: 4rem 1.25rem; }
+      .gallery-section { padding: 0 1.25rem 4rem; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
+      .contact-section { padding: 4rem 1.25rem; }
+      .form-wrap { padding: 2rem 1.25rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .chat-window { width: min(320px, calc(100vw - 3rem)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero-scroll-hint::before { animation: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- SKIP LINK (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Siirry pääsisältöön</a>
+
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg custom-navbar fixed-top">
-    <div class="container">
-      <a class="navbar-brand brand-logo" href="#home">Aurora Café</a>
-
-      <button
-        class="navbar-toggler custom-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Avaa navigaatio"
-      >
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar" id="navbar" aria-label="Päänavigaatio">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="Aurora Café — etusivu">AURORA</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#home">Etusivu</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Galleria</a></li>
+        <li><a href="#contact">Yhteystiedot</a></li>
+        <li><a href="#contact" class="nav-cta">Varaa pöytä</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Avaa valikko" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
       </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-3">
-          <li class="nav-item">
-            <a class="nav-link" href="#home">Etusivu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#menu">Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#gallery">Galleria</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Yhteystiedot</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-cta" href="#contact">Varaa pöytä</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero-section d-flex align-items-center" id="home">
-    <div class="container hero-content">
-      <div class="row align-items-center hero-row">
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul role="list">
+      <li><a href="#home" class="mobile-link">Etusivu</a></li>
+      <li><a href="#menu" class="mobile-link">Menu</a></li>
+      <li><a href="#gallery" class="mobile-link">Galleria</a></li>
+      <li><a href="#contact" class="mobile-link">Yhteystiedot</a></li>
+      <li><a href="#contact" class="mobile-link" style="color:var(--copper)">Varaa pöytä →</a></li>
+    </ul>
+  </div>
 
-        <div class="col-lg-6">
-          <p class="hero-subtitle">Aurora Café</p>
+  <main id="main-content">
 
-          <h1 class="hero-title">
-            Rauhallinen kahvihetki<br>
-            keskellä kaupunkia
-          </h1>
-
-          <p class="hero-text">
-            Aurora Café on moderni ja tunnelmallinen kahvila, jossa laadukkaat maut,
-            kiireetön ilmapiiri ja harkittu estetiikka kohtaavat. Tule aamukahville,
-            brunssille tai rauhalliseen hetkeen hyvän kahvin äärelle.
-          </p>
-
-          <div class="hero-buttons d-flex flex-wrap gap-3">
-            <a href="#menu" class="btn hero-btn-primary">Tutustu menuun</a>
-            <a href="#contact" class="btn hero-btn-secondary">Varaa pöytä</a>
-          </div>
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Hero-osio">
+      <div class="hero-left">
+        <p class="hero-tag">Rovaniemi, Lappi</p>
+        <h1 class="hero-title">
+          <em>Rauhallinen</em>
+          AURORA<br>CAFÉ
+        </h1>
+        <p class="hero-body">
+          Tunnelmallinen kahvila, jossa laadukkaat maut, kiireetön ilmapiiri
+          ja harkittu estetiikka kohtaavat pohjoisen rauhan keskellä.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-primary">Tutustu menuun</a>
+          <a href="#contact" class="btn-ghost">Varaa pöytä</a>
         </div>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <img src="img/hero_coffee.jpg" alt="">
+      </div>
+      <p class="hero-scroll-hint" aria-hidden="true">Vieritä</p>
+    </section>
 
-        <div class="col-lg-6 text-center hero-image-col">
-          <img
-            src="img/hero_coffee.jpg"
-            class="hero-image img-fluid"
-            alt="Kahvikuppi ja kahvipapuja Aurora Cafén tunnelmassa"
-          >
-        </div>
-
+    <!-- STATS BAR -->
+    <div class="stats-bar" aria-label="Luvuissa" role="region">
+      <div class="stat-item reveal">
+        <div class="stat-num">2018</div>
+        <div class="stat-label">Perustettu</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">Google-arvio</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Tuotetta menussa</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Erikoiskahvia</div>
       </div>
     </div>
-  </section>
 
-  <!-- SUOSITUIMMAT TUOTTEET -->
-  <section class="featured-section" id="featured">
-    <div class="container">
-      <div class="row align-items-end mb-5">
-        <div class="col-lg-6">
-          <p class="section-tag">Aurora Café</p>
-          <h2 class="featured-title">Suosituimmat tuotteet</h2>
-        </div>
-
-        <div class="col-lg-6">
+    <!-- FEATURED PRODUCTS -->
+    <section id="featured" aria-labelledby="featured-title">
+      <div class="featured">
+        <div class="featured-header reveal">
+          <div>
+            <p class="section-tag">Suosituimmat</p>
+            <h2 class="section-title" id="featured-title">VALITUT<br>TUOTTEET</h2>
+          </div>
           <p class="featured-intro">
             Kahvilamme rakastetuimmat maut yhdistävät laadukkaat raaka-aineet,
-            pehmeät aromit ja kiireettömän kahvihetken.
+            pehmeät aromit ja kiireettömän kahvihetken pohjoisen tunnelmassa.
           </p>
         </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <article class="featured-item">
-            <div class="featured-image-wrap">
-              <img src="img/cappuccino.jpg" alt="Cappuccino" class="featured-image">
+        <div class="featured-grid">
+          <article class="product-card reveal">
+            <div class="product-img-wrap">
+              <img src="img/cappuccino.jpg" alt="Cappuccino — täyteläinen espresso ja pehmeä maitovaahto">
             </div>
-            <div class="featured-content">
-              <h3 class="featured-item-title">Cappuccino</h3>
-              <p class="featured-text">
-                Täyteläinen espresso, pehmeä maitovaahto ja klassinen makuhetki.
-              </p>
-              <span class="featured-price">4,50 €</span>
+            <div class="product-info">
+              <h3 class="product-name">CAPPUCCINO</h3>
+              <p class="product-desc">Täyteläinen espresso, pehmeä maitovaahto ja klassinen makuhetki.</p>
+              <span class="product-price">4,50 €</span>
             </div>
           </article>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <article class="featured-item featured-item-offset">
-            <div class="featured-image-wrap">
-              <img src="img/berry_parfait.jpg" alt="Marjaparfait" class="featured-image">
+          <article class="product-card reveal reveal-delay-1">
+            <div class="product-img-wrap">
+              <img src="img/berry_parfait.jpg" alt="Marjaparfait — pehmeää vaahtoa, marjoja ja granolaa">
             </div>
-            <div class="featured-content">
-              <h3 class="featured-item-title">Marjaparfait</h3>
-              <p class="featured-text">
-                Raikas kerrosjälkiruoka, jossa on pehmeää parfait-vaahtoa, marjoja sekä granolaa.
-              </p>
-              <span class="featured-price">6,20 €</span>
+            <div class="product-info">
+              <h3 class="product-name">MARJAPARFAIT</h3>
+              <p class="product-desc">Raikas kerrosjälkiruoka — pehmeää vaahtoa, marjoja ja granolaa.</p>
+              <span class="product-price">6,20 €</span>
             </div>
           </article>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <article class="featured-item">
-            <div class="featured-image-wrap">
-              <img src="img/cinnamon_roll.jpg" alt="Kanelipulla" class="featured-image">
+          <article class="product-card reveal reveal-delay-2">
+            <div class="product-img-wrap">
+              <img src="img/cinnamon_roll.jpg" alt="Cinnamon Roll — amerikkalainen kanelipulla">
             </div>
-            <div class="featured-content">
-              <h3 class="featured-item-title">Cinnamon Roll</h3>
-              <p class="featured-text">
-                Amerikkalainen kanelipulla, pehmeä ja juuri sopivan mausteinen klassikko kahvin rinnalle.
-              </p>
-              <span class="featured-price">3,90 €</span>
+            <div class="product-info">
+              <h3 class="product-name">CINNAMON ROLL</h3>
+              <p class="product-desc">Amerikkalainen kanelipulla — pehmeä ja juuri sopivan mausteinen.</p>
+              <span class="product-price">3,90 €</span>
             </div>
           </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- MENU -->
-  <section class="menu-section" id="menu">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-lg-6">
-          <p class="section-tag">Menu</p>
-          <h2 class="menu-title">Makujen rauhallinen rytmi</h2>
-        </div>
-        <div class="col-lg-6">
-          <p class="menu-intro">
-            Menumme koostuu huolella valituista kahveista, teelaaduista ja
-            tuoreista leivonnaisista, jotka sopivat niin kiireettömään aamuun
-            kuin iltapäivän hengähdyshetkeen.
+    <!-- MENU -->
+    <section class="menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="menu-inner">
+        <div class="menu-header reveal">
+          <div>
+            <p class="section-tag">Menu</p>
+            <h2 class="section-title" id="menu-title">MAKUJEN<br>RYTMI</h2>
+          </div>
+          <p class="featured-intro" style="align-self:end">
+            Huolella valittuja kahveja, teelaatuja ja tuoreita leivonnaisia —
+            kiireettömästä aamusta iltapäivän hengähdyshetkeen.
           </p>
         </div>
-      </div>
 
-      <div class="menu-block">
-        <div class="row">
-          <div class="col-lg-4">
-            <h3 class="menu-category">Kahvit</h3>
+        <div class="menu-tabs" role="tablist" aria-label="Menun kategoriat">
+          <button class="menu-tab active" role="tab" aria-selected="true" aria-controls="panel-coffee" id="tab-coffee">Kahvit</button>
+          <button class="menu-tab" role="tab" aria-selected="false" aria-controls="panel-tea" id="tab-tea">Teet</button>
+          <button class="menu-tab" role="tab" aria-selected="false" aria-controls="panel-pastry" id="tab-pastry">Leivonnaiset</button>
+        </div>
+
+        <div id="panel-coffee" class="menu-panel active" role="tabpanel" aria-labelledby="tab-coffee">
+          <div class="menu-list">
+            <div class="menu-item"><div><p class="menu-item-name">Espresso</p><p class="menu-item-desc">Pieni mutta intensiivinen klassikko — kahvin täyteläinen aromi.</p></div><span class="menu-item-price">3,20 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Cappuccino</p><p class="menu-item-desc">Espressoa ja pehmeää maitovaahtoa tasapainoisessa suhteessa.</p></div><span class="menu-item-price">4,50 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Latte</p><p class="menu-item-desc">Pehmeä ja lämmin — kahvin ja maidon maut kohtaavat lempeästi.</p></div><span class="menu-item-price">4,90 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Flat White</p><p class="menu-item-desc">Tiivis, samettinen espresso-maitojuoma — australialainen klassikko.</p></div><span class="menu-item-price">4,70 €</span></div>
           </div>
+        </div>
+        <div id="panel-tea" class="menu-panel" role="tabpanel" aria-labelledby="tab-tea">
+          <div class="menu-list">
+            <div class="menu-item"><div><p class="menu-item-name">Vihreä tee</p><p class="menu-item-desc">Raikas ja kevyt — pehmeä ja puhdas jälkimaku.</p></div><span class="menu-item-price">3,80 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Chai latte</p><p class="menu-item-desc">Mausteinen ja lämmin — tee, maito ja pehmeät aromit.</p></div><span class="menu-item-price">4,80 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Yrttitee</p><p class="menu-item-desc">Luonnollisen rauhoittava — hidas ja levollinen hetki.</p></div><span class="menu-item-price">3,90 €</span></div>
+          </div>
+        </div>
+        <div id="panel-pastry" class="menu-panel" role="tabpanel" aria-labelledby="tab-pastry">
+          <div class="menu-list">
+            <div class="menu-item"><div><p class="menu-item-name">Kanelipulla</p><p class="menu-item-desc">Tuore ja pehmeä klassikko — sopivasti makeutta ja mausteisuutta.</p></div><span class="menu-item-price">3,90 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Mustikkapiiras</p><p class="menu-item-desc">Pohjoisen marjoista — makeus ja raikkaus kohtaavat.</p></div><span class="menu-item-price">4,40 €</span></div>
+            <div class="menu-item"><div><p class="menu-item-name">Vegaaninen brownie</p><p class="menu-item-desc">Täyteläinen suklaaleivonnainen — pehmeä ja runsas makuelämys.</p></div><span class="menu-item-price">4,60 €</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="col-lg-8">
-            <div class="menu-list">
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Espresso</h4>
-                    <span>3,20 €</span>
-                  </div>
-                  <p>Pieni mutta intensiivinen klassikko, jossa korostuu kahvin täyteläinen aromi.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Cappuccino</h4>
-                    <span>4,50 €</span>
-                  </div>
-                  <p>Espressoa ja pehmeää maitovaahtoa tasapainoisessa ja samettisessa suhteessa.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Latte</h4>
-                    <span>4,90 €</span>
-                  </div>
-                  <p>Pehmeä ja lämmin kahvijuoma, jossa kahvin ja maidon maut kohtaavat lempeästi.</p>
-                </div>
-              </div>
+    <!-- TESTIMONIALS (social proof) -->
+    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-title">
+      <div class="testimonials-header reveal">
+        <p class="section-tag">Asiakkaiden sanoin</p>
+        <h2 class="section-title" id="testimonials-title">MITÄ<br>SANOTAAN</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars" aria-label="5 tähteä">★★★★★</div>
+          <p class="testimonial-text">"Paras cappuccino koko Lapissa. Tunnelma on kuin pysähtyisi hetkeksi pohjoisen hiljaisuuteen — juuri sitä kaipaan."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">MK</div>
+            <div>
+              <p class="testimonial-name">Minna K.</p>
+              <p class="testimonial-meta">Google-arvostelu · 2025</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars" aria-label="5 tähteä">★★★★★</div>
+          <p class="testimonial-text">"Tulin kerran, nyt käyn viikoittain. Marjaparfait on täydellinen ja henkilökunta muistaa tilaukseni."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">JH</div>
+            <div>
+              <p class="testimonial-name">Jere H.</p>
+              <p class="testimonial-meta">Google-arvostelu · 2025</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars" aria-label="5 tähteä">★★★★★</div>
+          <p class="testimonial-text">"Löydettiin pöytävarauksen kautta — vastasivat nopeasti ja järjestivät juuri oikean paikan ikkunan äärestä."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">AS</div>
+            <div>
+              <p class="testimonial-name">Anna S.</p>
+              <p class="testimonial-meta">Google-arvostelu · 2025</p>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="menu-block">
-        <div class="row">
-          <div class="col-lg-4">
-            <h3 class="menu-category">Teet</h3>
-          </div>
-
-          <div class="col-lg-8">
-            <div class="menu-list">
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Vihreä tee</h4>
-                    <span>3,80 €</span>
-                  </div>
-                  <p>Raikas ja kevyt teehetki, jossa on pehmeä ja puhdas jälkimaku.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Chai latte</h4>
-                    <span>4,80 €</span>
-                  </div>
-                  <p>Mausteinen ja lämmin juoma, jossa yhdistyvät tee, maito ja pehmeät aromit.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Yrttitee</h4>
-                    <span>3,90 €</span>
-                  </div>
-                  <p>Luonnollisen rauhoittava vaihtoehto hitaaseen ja levolliseen hetkeen.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- GALLERY -->
+    <section class="gallery-section" id="gallery" aria-labelledby="gallery-title">
+      <div class="gallery-header reveal">
+        <p class="section-tag">Galleria</p>
+        <h2 class="section-title" id="gallery-title">TUNNELMIA<br>KAHVILASTA</h2>
+      </div>
+      <div class="gallery-grid" role="list">
+        <div class="gallery-item" role="listitem">
+          <img src="img/gallery1.jpg" alt="Kahvilatuotteita esillä">
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img src="img/gallery2.jpg" alt="Kahvilan tunnelmallinen sisustus">
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img src="img/gallery3.jpg" alt="Leivonnainen ja kahvikuppi">
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img src="img/gallery4.jpg" alt="Lähikuva kahvipavuista">
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img src="img/gallery5.jpg" alt="Baristin kädet kahvinkeitossa">
         </div>
       </div>
+    </section>
 
-      <div class="menu-block">
-        <div class="row">
-          <div class="col-lg-4">
-            <h3 class="menu-category">Leivonnaiset</h3>
-          </div>
+    <!-- CONTACT & FORM -->
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
 
-          <div class="col-lg-8">
-            <div class="menu-list">
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Kanelipulla</h4>
-                    <span>3,90 €</span>
-                  </div>
-                  <p>Tuore ja pehmeä klassikko, jossa on sopivasti makeutta ja mausteisuutta.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Mustikkapiiras</h4>
-                    <span>4,40 €</span>
-                  </div>
-                  <p>Pohjoisen marjoista inspiroitunut leivonnainen, jossa yhdistyvät makeus ja raikkaus.</p>
-                </div>
-              </div>
-
-              <div class="menu-item">
-                <div class="menu-item-text">
-                  <div class="menu-item-top">
-                    <h4>Vegaaninen brownie</h4>
-                    <span>4,60 €</span>
-                  </div>
-                  <p>Täyteläinen suklaaleivonnainen, joka tarjoaa pehmeän ja runsaan makuelämyksen.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- GALLERIA -->
-  <section class="gallery-section" id="gallery">
-    <div class="container">
-      <div class="row align-items-end mb-5">
-        <div class="col-lg-6">
-          <p class="section-tag">Galleria</p>
-          <h2 class="gallery-title">Tunnelmia kahvilasta</h2>
-        </div>
-
-        <div class="col-lg-6">
-          <p class="gallery-intro">
-            Aurora Caféssa yhdistyvät rauhallinen tunnelma, lämpimät sävyt
-            ja kiireettömät kahvihetket. Galleria kokoaa yhteen hetkiä,
-            jotka tekevät kahvilasta paikan, johon haluaa palata.
-          </p>
-        </div>
-      </div>
-
-      <div class="gallery-grid">
-        <div class="gallery-item gallery-large">
-          <img src="img/gallery1.jpg" alt="Kahvilatuotteita" class="gallery-image">
-        </div>
-
-        <div class="gallery-item gallery-small-top">
-          <img src="img/gallery2.jpg" alt="Kahvilan sisustus" class="gallery-image">
-        </div>
-
-        <div class="gallery-item gallery-small-bottom">
-          <img src="img/gallery3.jpg" alt="Leivonnainen ja kahvi" class="gallery-image">
-        </div>
-
-        <div class="gallery-item gallery-wide-left">
-          <img src="img/gallery4.jpg" alt="Kahvipapuja" class="gallery-image">
-        </div>
-
-        <div class="gallery-item gallery-wide-right">
-          <img src="img/gallery5.jpg" alt="Kahvin teko" class="gallery-image">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- YHTEYSTIEDOT -->
-  <section class="contact-section" id="contact">
-    <div class="container">
-      <div class="row g-5 align-items-start">
-
-        <div class="col-lg-5">
-          <p class="section-tag">Yhteystiedot</p>
-          <h2 class="contact-title">Vieraile tai varaa pöytä</h2>
-
-          <p class="contact-intro">
-            Haluatko varata pöydän brunssille, kahvihetkeen tai tapaamiseen?
-            Lähetä varauspyyntö lomakkeella tai ota yhteyttä suoraan. Vahvistamme
-            varaukset sähköpostitse mahdollisimman pian.
-          </p>
-
+        <div>
+          <p class="section-tag reveal">Yhteystiedot</p>
+          <h2 class="section-title reveal" id="contact-title">VIERAILE<br>TAI VARAA</h2>
           <div class="contact-info-group">
-            <div class="contact-info-item">
-              <h3>Osoite</h3>
-              <p>Koskikatu 12<br>96200 Rovaniemi</p>
+            <div class="reveal">
+              <p class="contact-info-label">Osoite</p>
+              <p class="contact-info-value">Koskikatu 12<br>96200 Rovaniemi</p>
             </div>
-
-            <div class="contact-info-item">
-              <h3>Aukioloajat</h3>
-              <p>Ma–Pe 7.30–18.00<br>La 9.00–17.00<br>Su 10.00–16.00</p>
+            <div class="reveal reveal-delay-1">
+              <p class="contact-info-label">Aukioloajat</p>
+              <p class="contact-info-value">Ma–Pe 7.30–18.00<br>La 9.00–17.00<br>Su 10.00–16.00</p>
             </div>
-
-            <div class="contact-info-item">
-              <h3>Varaus ja yhteydenotot</h3>
-              <p>hello@auroracafe.fi<br>040 123 4567</p>
+            <div class="reveal reveal-delay-2">
+              <p class="contact-info-label">Varaukset & yhteydenotot</p>
+              <p class="contact-info-value">hello@auroracafe.fi<br>040 123 4567</p>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-7">
-          <div class="booking-form-wrap">
-            <h3 class="booking-form-title">Lähetä varauspyyntö</h3>
-            <p class="booking-form-intro">
-              Täytä tiedot alle, niin palaamme varauksen vahvistukseen sähköpostitse.
-            </p>
+        <div class="form-wrap reveal">
+          <p class="form-title">VARAA PÖYTÄ</p>
+          <p class="form-subtitle">Täytä tiedot alle. Vahvistamme varaukset sähköpostitse 24 tunnin sisällä.</p>
 
-            <form class="booking-form" id="bookingForm">
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label for="name" class="form-label">Nimi</label>
-                  <input type="text" class="form-control custom-input" id="name" placeholder="Nimesi">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="email" class="form-label">Sähköposti</label>
-                  <input type="email" class="form-control custom-input" id="email" placeholder="Sähköpostiosoite">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="date" class="form-label">Päivämäärä</label>
-                  <input type="date" class="form-control custom-input" id="date">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="time" class="form-label">Toivottu kellonaika</label>
-                  <input type="time" class="form-control custom-input" id="time">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="guests" class="form-label">Henkilömäärä</label>
-                  <select class="form-select custom-input" id="guests">
-                    <option selected>Valitse</option>
-                    <option>1 henkilö</option>
-                    <option>2 henkilöä</option>
-                    <option>3 henkilöä</option>
-                    <option>4 henkilöä</option>
-                    <option>5 henkilöä</option>
-                    <option>6+ henkilöä</option>
-                  </select>
-                </div>
-
-                <div class="col-12">
-                  <label for="message" class="form-label">Lisätiedot</label>
-                  <textarea class="form-control custom-input custom-textarea" id="message" rows="5" placeholder="Esimerkiksi allergiat tai erityistoiveet"></textarea>
-                </div>
-
-                <div class="col-12">
-                  <button type="submit" class="btn booking-btn">Lähetä varauspyyntö</button>
-                </div>
+          <form id="bookingForm" novalidate aria-label="Pöydänvarauslomake">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Nimi <span aria-hidden="true" style="color:var(--copper)">*</span></label>
+                <input type="text" class="form-control" id="name" autocomplete="name" placeholder="Etunimi Sukunimi" aria-required="true" aria-describedby="name-error">
+                <span class="field-error" id="name-error" role="alert">Anna nimesi</span>
               </div>
-            </form>
-          </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Sähköposti <span aria-hidden="true" style="color:var(--copper)">*</span></label>
+                <input type="email" class="form-control" id="email" autocomplete="email" placeholder="osoite@esimerkki.fi" aria-required="true" aria-describedby="email-error">
+                <span class="field-error" id="email-error" role="alert">Anna kelvollinen sähköpostiosoite</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="date">Päivämäärä <span aria-hidden="true" style="color:var(--copper)">*</span></label>
+                <input type="date" class="form-control" id="date" aria-required="true" aria-describedby="date-error">
+                <span class="field-error" id="date-error" role="alert">Valitse päivämäärä</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="time">Kellonaika</label>
+                <input type="time" class="form-control" id="time" min="07:30" max="17:30">
+              </div>
+            </div>
+            <div class="form-row" style="margin-bottom:1rem">
+              <div class="form-group">
+                <label class="form-label" for="guests">Henkilömäärä <span aria-hidden="true" style="color:var(--copper)">*</span></label>
+                <select class="form-control" id="guests" aria-required="true" aria-describedby="guests-error">
+                  <option value="">Valitse</option>
+                  <option value="1">1 henkilö</option>
+                  <option value="2">2 henkilöä</option>
+                  <option value="3">3 henkilöä</option>
+                  <option value="4">4 henkilöä</option>
+                  <option value="5">5 henkilöä</option>
+                  <option value="6+">6+ henkilöä</option>
+                </select>
+                <span class="field-error" id="guests-error" role="alert">Valitse henkilömäärä</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="occasion">Tilaisuus</label>
+                <select class="form-control" id="occasion">
+                  <option value="">Valitse</option>
+                  <option>Kahvihetki</option>
+                  <option>Brunssi</option>
+                  <option>Työkokous</option>
+                  <option>Syntymäpäivä</option>
+                  <option>Muu</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem">
+              <label class="form-label" for="message">Lisätiedot</label>
+              <textarea class="form-control" id="message" rows="3" placeholder="Allergiat, erityistoiveet tai muu lisätieto..."></textarea>
+            </div>
+
+            <div class="trust-row" aria-label="Luottamustiedot">
+              <span>🔒</span> Tietosi käsitellään turvallisesti
+              &nbsp;·&nbsp;
+              <span>✓</span> Maksuton peruutus 24h etukäteen
+              &nbsp;·&nbsp;
+              <span>📧</span> Vahvistus 24h sisällä
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn" aria-live="polite">
+              <div class="spinner" aria-hidden="true"></div>
+              <span class="btn-text">Lähetä varauspyyntö</span>
+            </button>
+          </form>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
-  <footer class="footer-section">
-    <div class="container text-center">
-      <h2 class="footer-brand">Aurora Café</h2>
-      <p class="footer-text">Pohjoisen rauhaa kupillinen kerrallaan.</p>
-
-      <div class="footer-links">
-        <a href="#home">Etusivu</a>
-        <a href="#menu">Menu</a>
-        <a href="#gallery">Galleria</a>
-        <a href="#contact">Yhteystiedot</a>
-      </div>
-
-      <p class="footer-copy">© 2026 Aurora Café</p>
-    </div>
+  <footer class="footer" role="contentinfo">
+    <p class="footer-logo">AURORA CAFÉ</p>
+    <nav class="footer-links" aria-label="Alatunnisteen navigaatio">
+      <a href="#home">Etusivu</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Galleria</a>
+      <a href="#contact">Yhteystiedot</a>
+    </nav>
+    <p class="footer-copy">© 2026 Aurora Café</p>
   </footer>
 
-  <!-- CHATBOT -->
-  <div class="chatbot">
-    <button class="chat-toggle" id="chatToggle" aria-label="Avaa chat">
-      💬
-    </button>
+  <!-- STICKY CTA (mobile) -->
+  <div class="sticky-cta" aria-hidden="true">
+    <a href="#contact">Varaa pöytä →</a>
+  </div>
 
-    <div class="chat-window" id="chatWindow">
+  <!-- CHATBOT -->
+  <div class="chatbot" role="complementary" aria-label="Asiakaspalveluchat">
+    <div class="chat-window" id="chatWindow" aria-hidden="true">
       <div class="chat-header">
         <div>
-          <h3>Aurora Café</h3>
-          <p>Chatbot</p>
+          <p class="chat-header-name">AURORA</p>
+          <p class="chat-header-sub"><span class="chat-header-dot" aria-hidden="true"></span>Asiakaspalvelu</p>
         </div>
-        <button class="chat-close" id="chatClose" aria-label="Sulje chat">×</button>
+        <button class="chat-close-btn" id="chatClose" aria-label="Sulje chat">×</button>
       </div>
-
-      <div class="chat-body" id="chatBody">
-        <div class="chat-message bot-message">
-          Hei! Voit kysyä esimerkiksi aukioloajoista, menusta, sijainnista, varauksista tai erityisruokavalioista.
-        </div>
+      <div class="chat-body" id="chatBody" role="log" aria-live="polite" aria-label="Keskustelu">
+        <div class="chat-message bot-message">Hei! Voin auttaa aukioloajoissa, menussa, sijainnissa, varauksissa tai erityisruokavalioissa.</div>
       </div>
-
-      <form class="chat-form" id="chatForm">
-        <input
-          type="text"
-          id="chatInput"
-          class="chat-input"
-          placeholder="Kirjoita viesti..."
-          autocomplete="off"
-        >
+      <form class="chat-form" id="chatForm" aria-label="Lähetä viesti">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Kirjoita viesti..." autocomplete="off" aria-label="Viesti chatbotille">
         <button type="submit" class="chat-send">Lähetä</button>
       </form>
     </div>
+    <button class="chat-toggle" id="chatToggle" aria-label="Avaa asiakaspalveluchat" aria-expanded="false">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+      </svg>
+    </button>
   </div>
 
-  <!-- VARAUSILMOITUS MODAL -->
-  <div class="modal fade" id="bookingDemoModal" tabindex="-1" aria-labelledby="bookingDemoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content booking-modal-content">
-        <div class="modal-header booking-modal-header">
-          <h5 class="modal-title" id="bookingDemoModalLabel">Varauspyyntö vastaanotettu</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sulje"></button>
-        </div>
-        <div class="modal-body booking-modal-body" id="bookingModalMessage">
-          Kiitos! Varauspyyntösi on vastaanotettu.
-        </div>
-        <div class="modal-footer booking-modal-footer">
-          <button type="button" class="btn booking-modal-btn" data-bs-dismiss="modal">Sulje</button>
-        </div>
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-icon" aria-hidden="true">✓</div>
+      <p class="modal-title" id="modalTitle">VARAUSPYYNTÖ LÄHETETTY</p>
+      <div class="modal-body-text" id="modalContent">
+        Varauspyyntösi on vastaanotettu.
       </div>
+      <button class="modal-close" id="modalClose">Sulje</button>
+      <p style="font-size:0.72rem;color:rgba(240,232,220,0.25);margin-top:1rem;text-align:center">Tämä on demokäyttöön tehty referenssisivu.</p>
     </div>
   </div>
 
   <script>
-    const chatToggle = document.getElementById("chatToggle");
-    const chatClose = document.getElementById("chatClose");
-    const chatWindow = document.getElementById("chatWindow");
-    const chatForm = document.getElementById("chatForm");
-    const chatInput = document.getElementById("chatInput");
-    const chatBody = document.getElementById("chatBody");
-    const bookingForm = document.getElementById("bookingForm");
-    const bookingModalMessage = document.getElementById("bookingModalMessage");
+    /* NAVBAR scroll */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
-    chatToggle.addEventListener("click", () => {
-      chatWindow.classList.toggle("active");
+    /* HAMBURGER / MOBILE MENU */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+        mobileMenu.setAttribute('aria-hidden', true);
+      });
     });
 
-    chatClose.addEventListener("click", () => {
-      chatWindow.classList.remove("active");
+    /* MENU TABS */
+    document.querySelectorAll('.menu-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.menu-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+      });
+      tab.addEventListener('keydown', e => {
+        const tabs = [...document.querySelectorAll('.menu-tab')];
+        const idx = tabs.indexOf(tab);
+        if (e.key === 'ArrowRight') tabs[(idx + 1) % tabs.length].focus();
+        if (e.key === 'ArrowLeft') tabs[(idx - 1 + tabs.length) % tabs.length].focus();
+      });
     });
 
-    function addMessage(message, sender) {
-      const messageDiv = document.createElement("div");
-      messageDiv.classList.add("chat-message");
-      messageDiv.classList.add(sender === "bot" ? "bot-message" : "user-message");
-      messageDiv.textContent = message;
-      chatBody.appendChild(messageDiv);
-      chatBody.scrollTop = chatBody.scrollHeight;
+    /* SCROLL ANIMATIONS (Intersection Observer) */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* FORM VALIDATION (inline) */
+    function validateField(id, errorId, check) {
+      const el = document.getElementById(id);
+      const err = document.getElementById(errorId);
+      const valid = check(el.value.trim());
+      el.classList.toggle('error', !valid);
+      err.classList.toggle('visible', !valid);
+      el.setAttribute('aria-invalid', !valid);
+      return valid;
     }
 
-    function getBotReply(userMessage) {
-      const message = userMessage.toLowerCase();
+    const bookingForm = document.getElementById('bookingForm');
+    const submitBtn  = document.getElementById('submitBtn');
 
-      if (message.includes("aukiolo") || message.includes("milloin") || message.includes("auki")) {
-        return "Aurora Café on avoinna ma–pe 7.30–18.00, la 9.00–17.00 ja su 10.00–16.00.";
-      }
-
-      if (message.includes("missä") || message.includes("osoite") || message.includes("sijainti") || message.includes("rovaniemi")) {
-        return "Löydät meidät osoitteesta Koskikatu 12, 96200 Rovaniemi.";
-      }
-
-      if (message.includes("vegaani") || message.includes("vegaaninen") || message.includes("vegaan")) {
-        return "Kyllä, valikoimassamme on vegaanisia vaihtoehtoja, kuten vegaaninen brownie sekä kasvipohjaisia maitovaihtoehtoja kahvijuomiin.";
-      }
-
-      if (message.includes("gluteen") || message.includes("allergia") || message.includes("erityisruok")) {
-        return "Huomioimme erityisruokavaliot mahdollisuuksien mukaan. Tarkemmat tiedot tuotteista saat henkilökunnalta tai yhteydenottolomakkeella.";
-      }
-
-      if (message.includes("varaus") || message.includes("pöytä") || message.includes("varata") || message.includes("booking")) {
-        return "Voit lähettää varauspyynnön sivun lomakkeella. Vahvistamme varaukset sähköpostitse mahdollisimman pian.";
-      }
-
-      if (message.includes("menu") || message.includes("kahvi") || message.includes("tee") || message.includes("leivonn")) {
-        return "Menustamme löydät kahveja, teelaatuja ja leivonnaisia. Voit tutustua valikoimaan Menu-osiossa.";
-      }
-
-      if (message.includes("brunssi") || message.includes("aamiainen") || message.includes("lounas")) {
-        return "Tällä demoversiolla emme esittele erillistä lounaslistaa, mutta kahvilan valikoimaan kuuluu kahveja, teetä ja leivonnaisia.";
-      }
-
-      if (message.includes("koira") || message.includes("lemmikki")) {
-        return "Voit kysyä lemmikeistä suoraan kahvilalta puhelimitse tai sähköpostitse. Tätä tietoa ei ole tällä demoversiolla erikseen määritelty.";
-      }
-
-      if (message.includes("hei") || message.includes("moikka") || message.includes("hello")) {
-        return "Hei! Voin auttaa esimerkiksi aukioloajoissa, sijainnissa, menussa, varauksissa ja erityisruokavalioissa.";
-      }
-
-      if (message.includes("kiitos")) {
-        return "Ole hyvä! Kysy lisää, jos haluat tietoa esimerkiksi menusta tai varauksista.";
-      }
-
-      return "En valitettavasti osannut vastata tuohon. Voit kysyä esimerkiksi aukioloajoista, sijainnista, varauksista, menusta tai erityisruokavalioista.";
-    }
-
-    chatForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const userMessage = chatInput.value.trim();
-      if (userMessage === "") return;
-
-      addMessage(userMessage, "user");
-      const botReply = getBotReply(userMessage);
-
-      setTimeout(() => {
-        addMessage(botReply, "bot");
-      }, 400);
-
-      chatInput.value = "";
+    ['name','email','date','guests'].forEach(id => {
+      document.getElementById(id).addEventListener('blur', () => {
+        const checks = {
+          name:   v => v.length >= 2,
+          email:  v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+          date:   v => v !== '',
+          guests: v => v !== ''
+        };
+        validateField(id, id + '-error', checks[id]);
+      });
     });
 
-    bookingForm.addEventListener("submit", function (e) {
+    bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      const nameOk   = validateField('name',   'name-error',   v => v.length >= 2);
+      const emailOk  = validateField('email',  'email-error',  v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      const dateOk   = validateField('date',   'date-error',   v => v !== '');
+      const guestsOk = validateField('guests', 'guests-error', v => v !== '');
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const date = document.getElementById("date").value.trim();
-      const time = document.getElementById("time").value.trim();
-      const guests = document.getElementById("guests").value;
-
-      if (name === "" || email === "" || date === "" || guests === "Valitse") {
-        alert("Täytä ensin nimi, sähköposti, päivämäärä ja henkilömäärä.");
+      if (!nameOk || !emailOk || !dateOk || !guestsOk) {
+        const firstError = bookingForm.querySelector('.form-control.error');
+        if (firstError) firstError.focus();
         return;
       }
 
-      bookingModalMessage.innerHTML = `
-        Kiitos, <strong>${name}</strong>! Varauspyyntösi on vastaanotettu.<br><br>
-        <strong>Päivämäärä:</strong> ${date}<br>
-        <strong>Kellonaika:</strong> ${time || "Ei ilmoitettu"}<br>
-        <strong>Henkilömäärä:</strong> ${guests}<br>
-        <strong>Vahvistus:</strong> Lähetetään osoitteeseen ${email}.<br><br>
-        <strong>Huom:</strong> tämä on demokäyttöön tehty referenssisivu, eikä varausta oikeasti lähetetä eteenpäin.
-      `;
+      /* Loading state */
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      const btnText = submitBtn.querySelector('.btn-text');
+      btnText.textContent = 'Lähetetään...';
 
-      const bookingModal = new bootstrap.Modal(document.getElementById("bookingDemoModal"));
-      bookingModal.show();
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        btnText.textContent = 'Lähetä varauspyyntö';
 
-      bookingForm.reset();
+        const name   = document.getElementById('name').value.trim();
+        const email  = document.getElementById('email').value.trim();
+        const date   = document.getElementById('date').value;
+        const time   = document.getElementById('time').value || 'Ei ilmoitettu';
+        const guests = document.getElementById('guests').value;
+
+        document.getElementById('modalContent').innerHTML =
+          `Kiitos, <strong>${name}</strong>! Varauspyyntösi on vastaanotettu.<br><br>
+           <strong>Päivämäärä:</strong> ${date}<br>
+           <strong>Kellonaika:</strong> ${time}<br>
+           <strong>Henkilömäärä:</strong> ${guests}<br>
+           <strong>Vahvistus:</strong> lähetetään osoitteeseen ${email} 24h sisällä.`;
+
+        const modal = document.getElementById('successModal');
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.getElementById('modalClose').focus();
+        bookingForm.reset();
+      }, 1600);
     });
+
+    document.getElementById('modalClose').addEventListener('click', () => {
+      const modal = document.getElementById('successModal');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      submitBtn.focus();
+    });
+
+    document.getElementById('successModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        this.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    /* CHATBOT */
+    const chatToggle = document.getElementById('chatToggle');
+    const chatClose  = document.getElementById('chatClose');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatForm   = document.getElementById('chatForm');
+    const chatInput  = document.getElementById('chatInput');
+    const chatBody   = document.getElementById('chatBody');
+
+    chatToggle.addEventListener('click', () => {
+      const open = chatWindow.classList.toggle('active');
+      chatWindow.setAttribute('aria-hidden', !open);
+      chatToggle.setAttribute('aria-expanded', open);
+      if (open) chatInput.focus();
+    });
+    chatClose.addEventListener('click', () => {
+      chatWindow.classList.remove('active');
+      chatWindow.setAttribute('aria-hidden', 'true');
+      chatToggle.setAttribute('aria-expanded', 'false');
+      chatToggle.focus();
+    });
+
+    function addMessage(text, sender) {
+      const div = document.createElement('div');
+      div.classList.add('chat-message', sender === 'bot' ? 'bot-message' : 'user-message');
+      div.textContent = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+      const m = msg.toLowerCase();
+      if (m.match(/aukiolo|milloin|auki|suljettu/)) return 'Aurora Café on avoinna ma–pe 7.30–18.00, la 9.00–17.00 ja su 10.00–16.00.';
+      if (m.match(/miss[äa]|osoite|sijainti|rovaniemi/)) return 'Löydät meidät osoitteesta Koskikatu 12, 96200 Rovaniemi.';
+      if (m.match(/vegaani/)) return 'Valikoimassamme on vegaanisia vaihtoehtoja, kuten vegaaninen brownie ja kasvipohjaiset maitovaihtoehdot.';
+      if (m.match(/gluteen|allergia|erityisruok/)) return 'Huomioimme erityisruokavaliot. Tarkemmat tiedot saat henkilökunnalta tai yhteydenottolomakkeella.';
+      if (m.match(/varaus|pöytä|varata/)) return 'Voit lähettää varauspyynnön sivun lomakkeella. Vahvistamme sähköpostitse 24h sisällä.';
+      if (m.match(/menu|kahvi|tee|leivonn|cappuccino|latte/)) return 'Menustamme löydät erikoiskahveja, teelaatuja ja tuoreita leivonnaisia. Tutustu Menu-osioon sivulla.';
+      if (m.match(/hinta|maksaa|euroa/)) return 'Kahvimme ovat 3,20–4,90 €, teet 3,80–4,80 € ja leivonnaiset 3,90–6,20 €.';
+      if (m.match(/hei|moikka|moi|hello|terve/)) return 'Hei! Voin auttaa aukioloajoissa, menussa, sijainnissa ja varauksissa. Mitä haluaisit tietää?';
+      if (m.match(/kiitos/)) return 'Ole hyvä! Nähdään kahvilassa ☕';
+      return 'En aivan ymmärtänyt tuota. Voit kysyä esimerkiksi aukioloajoista, menuusta, sijainnista tai varauksista.';
+    }
+
+    chatForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      addMessage(msg, 'user');
+      chatInput.value = '';
+      setTimeout(() => addMessage(getBotReply(msg), 'bot'), 450);
+    });
+
+    /* SCROLL MARGIN dynamic (navbar height) */
+    function updateScrollMargin() {
+      const h = navbar.offsetHeight;
+      document.querySelectorAll('section[id]').forEach(s => {
+        s.style.scrollMarginTop = h + 'px';
+      });
+    }
+    updateScrollMargin();
+    window.addEventListener('resize', updateScrollMargin, { passive: true });
   </script>
 
 </body>
